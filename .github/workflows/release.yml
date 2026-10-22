@@ -1,0 +1,63 @@
+name: Build and release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to publish
+        required: true
+        default: "1.0.0"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Build Linux DEB
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Debian package
+        run: bash packaging/build_deb.sh "${{ inputs.version }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: focus-task-linux
+          path: dist/*.deb
+          if-no-files-found: error
+
+  windows:
+    name: Build Windows EXE
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build Windows executable
+        shell: pwsh
+        run: .\packaging\build_windows.ps1 -Version "${{ inputs.version }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: focus-task-windows
+          path: dist/FocusTasks.exe
+          if-no-files-found: error
+
+  release:
+    name: Publish release assets
+    needs: [linux, windows]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: focus-task-*
+          path: dist
+          merge-multiple: true
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: gh release create "v${RELEASE_VERSION}" dist/* --generate-notes
