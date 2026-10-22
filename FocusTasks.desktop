@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Focus Tasks
+Comment=Lista de tareas con temporizadores individuales
+Exec=focustask
+Icon=focustask
+Terminal=false
+Categories=Office;
+StartupNotify=true

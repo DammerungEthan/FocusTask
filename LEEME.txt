@@ -1,0 +1,8 @@
+FOCUS TASKS
+===========
+
+Aplicación de escritorio para Linux y Windows, con temporizadores
+independientes para cada tarea.
+
+Consulta README.md para ejecutar desde el código fuente, generar los
+instaladores .deb y .exe, y publicar una versión en GitHub.
