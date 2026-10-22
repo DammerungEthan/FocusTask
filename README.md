@@ -2,6 +2,10 @@
 
 Aplicación de escritorio de código abierto para Windows y Linux. Permite organizar tareas con temporizadores independientes, marcar tareas completadas y recibir un aviso al terminar el tiempo.
 
+## Captura de pantalla
+
+![Captura de Focus Tasks](screenshots/focus-tasks.png)
+
 ## Descargar
 
 Ve a la sección **Releases** de este repositorio y descarga el archivo para tu sistema:
