@@ -1,0 +1,10 @@
+# Datos personales de tareas
+data/tasks.json
+
+# Archivos generados al compilar
+dist/
+build/
+__pycache__/
+*.py[cod]
+*.spec
+.deb-stage.*/
