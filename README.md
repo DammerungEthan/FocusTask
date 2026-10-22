@@ -1,66 +1,41 @@
 # Focus Tasks
 
-Aplicación de escritorio para Linux y Windows, sencilla y oscura, con temporizadores independientes, guardado automático, tareas completadas y aviso al terminar cada temporizador.
+Aplicación de escritorio de código abierto para Windows y Linux. Permite organizar tareas con temporizadores independientes, marcar tareas completadas y recibir un aviso al terminar el tiempo.
 
-## Descarga
+## Descargar
 
-Abre la sección **Releases** de este repositorio y descarga:
+Ve a la sección **Releases** de este repositorio y descarga el archivo para tu sistema:
 
-- Debian/Ubuntu: `focustask_<versión>_all.deb`
-- Windows: `FocusTasks.exe`
+- **Debian o Ubuntu:** `focustask_<versión>_all.deb`
+- **Windows:** `FocusTasks.exe`
 
-En Debian/Ubuntu, instala el `.deb` con doble clic o desde una terminal:
+En Debian o Ubuntu, instala el `.deb` haciendo doble clic o con:
 
 ```bash
 sudo apt install ./focustask_1.0.0_all.deb
 ```
 
-En Windows, abre `FocusTasks.exe` con doble clic. No necesitas instalar Python.
+En Windows, abre `FocusTasks.exe`. No necesitas instalar Python.
 
 ## Ejecutar desde el código fuente
 
-Requiere Python 3 y Tkinter. En Debian/Ubuntu, si Tkinter no está instalado:
+Necesitas Python 3 y Tkinter. En Debian o Ubuntu, instala Tkinter si hace falta:
 
 ```bash
 sudo apt install python3-tk
 ```
 
-En Linux puedes ejecutar `./FocusTasks.sh`. En Windows abre PowerShell en esta carpeta y ejecuta:
+En Linux, ejecuta `./FocusTasks.sh`. En Windows, abre PowerShell en la carpeta del proyecto y ejecuta:
 
 ```powershell
 py focus_tasks.py
 ```
 
-## Archivos del proyecto
+## Crear instaladores
 
-- `focus_tasks.py`: aplicación y lógica compartida.
-- `FocusTasks.sh`, `FocusTasks.desktop`: lanzadores de Linux.
-- `packaging/build_deb.sh`: genera el instalador Debian/Ubuntu.
-- `packaging/build_windows.ps1`: genera el ejecutable de Windows.
-- `.github/workflows/release.yml`: compila los dos instaladores y crea una Release de GitHub.
-- `LICENSE`: licencia MIT.
+El mismo archivo `focus_tasks.py` contiene la app para ambos sistemas. Los scripts de `packaging/` generan el `.deb` de Debian/Ubuntu y el `.exe` de Windows.
 
-## Subir el proyecto desde el navegador de GitHub
-
-1. En GitHub, crea un repositorio nuevo llamado `FocusTask` y selecciona **Public**. No marques las opciones para crear README, `.gitignore` ni licencia: esos archivos ya están en este proyecto.
-2. Abre el repositorio y elige **Add file → Upload files**.
-3. Desde la carpeta `FocusTask` de tu PC, sube estos archivos de la raíz: `.gitignore`, `FocusTasks.desktop`, `FocusTasks.sh`, `LEEME.txt`, `LICENSE`, `README.md`, `focus_tasks.py` y `requirements-build.txt`.
-4. Sube también las carpetas completas `.github` y `packaging`. En el selector de archivos de Linux, pulsa **Ctrl+H** para mostrar las carpetas y el archivo ocultos que empiezan con punto.
-5. **No subas** `data/` (puede tener tu lista personal), `dist/` (son paquetes generados) ni `.git/` (no hace falta y puede no existir).
-6. Escribe el mensaje `Publica Focus Tasks` y selecciona **Commit directly to the main branch**. Presiona **Commit changes**.
-
-En el repositorio deben aparecer `.github/workflows/release.yml` y `.gitignore`. La primera activa la compilación; la segunda evita incluir tus tareas personales en futuras subidas.
-
-## Crear la descarga de Windows y Linux desde GitHub
-
-No hace falta compilar en tu PC ni crear etiquetas locales. Después de subir los archivos del proyecto al repositorio:
-
-1. Abre la pestaña **Actions**.
-2. Selecciona **Build and release** en la lista de la izquierda. Si GitHub muestra un botón para habilitar Actions, presiónalo.
-3. Presiona **Run workflow**, elige la rama `main` y deja la versión `1.0.0`.
-4. Presiona de nuevo **Run workflow**. Cuando termine con éxito, abre **Releases**: encontrarás el `.deb` y el `.exe` allí.
-
-Deja `1.0.0` en el campo de versión para mantener esa versión fija. Ejecuta este flujo una sola vez; si la Release ya existe, no vuelvas a crearla con el mismo número.
+Para generar los dos instaladores y publicarlos, usa **Actions → Build and release → Run workflow** en GitHub. Deja la versión `1.0.0` para mantener la versión actual. Al completar el flujo, los archivos aparecen en **Releases**.
 
 ## Datos y privacidad
 
@@ -69,8 +44,8 @@ Las tareas se guardan en el equipo del usuario:
 - Linux: `$XDG_DATA_HOME/focus-tasks/tasks.json` o, si no se define `XDG_DATA_HOME`, `~/.local/share/focus-tasks/tasks.json`.
 - Windows: `%LOCALAPPDATA%\focus-tasks\tasks.json`.
 
-El repositorio ignora `data/tasks.json`, que puede contener tareas personales. La app migra automáticamente ese archivo heredado en su primer inicio.
+La app no sube tus tareas a GitHub ni a ningún servidor. El repositorio excluye `data/tasks.json`, que podría contener tareas personales.
 
 ## Licencia
 
-MIT. Consulta [LICENSE](LICENSE).
+Este proyecto se distribuye bajo la licencia MIT. Consulta [LICENSE](LICENSE).
